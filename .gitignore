@@ -1,0 +1,13 @@
+
+/.idea/
+/logs/
+/vblog_admin/target/
+/vblog_api/target/
+/vblog_authority/target/
+/vblog_common/target/
+/vblog_eureka/target/
+/vblog_gateway/target/
+/vblog_utils/target/
+
+
+
