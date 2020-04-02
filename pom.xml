@@ -8,12 +8,18 @@
     <artifactId>vblog</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>vblog_cloud</name>
+    <name>vblog</name>
     <description>blog by cloud</description>
 
 
     <modules>
         <module>vblog_eureka</module>
+        <module>vblog_authority</module>
+        <module>vblog_admin</module>
+        <module>vblog_api</module>
+        <module>vblog_common</module>
+        <module>vblog_gateway</module>
+        <module>vblog_utils</module>
     </modules>
 
     <parent>
