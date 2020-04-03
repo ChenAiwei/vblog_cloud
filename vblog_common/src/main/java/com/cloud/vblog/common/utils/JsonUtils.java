@@ -1,4 +1,4 @@
-package com.cloud.vblog.utils;
+package com.cloud.vblog.common.utils;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -7,7 +7,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -22,7 +21,6 @@ import java.util.Map;
 /**
  * @author aiwei
  */
-@Slf4j
 public class JsonUtils {
 
     // 定义jackson对象

@@ -1,4 +1,4 @@
-package com.cloud.vblog.utils;
+package com.cloud.vblog.common.utils;
 
 
 import com.cloud.vblog.common.enums.ResultEnum;

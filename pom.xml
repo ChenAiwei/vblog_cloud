@@ -19,7 +19,6 @@
         <module>vblog_api</module>
         <module>vblog_common</module>
         <module>vblog_gateway</module>
-        <module>vblog_utils</module>
     </modules>
 
     <parent>

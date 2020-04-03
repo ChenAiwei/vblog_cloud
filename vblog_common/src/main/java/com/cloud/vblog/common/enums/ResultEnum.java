@@ -4,8 +4,11 @@ import lombok.Getter;
 
 @Getter
 public enum ResultEnum {
-    LOGIN_FAIL(1, "登录失败"),
-    ROLE_ERROR(2, "角色权限有误"),
+    LoginFail(-1, "登录失败"),
+    RoleError(-1, "角色权限有误"),
+	MissingServletRequestParameter(400,"Missing servletRequest parameter"),
+	TypeMismatchException(401,"Request parameter Type not match"),
+    RequestMethodNotAllowed(405,"Request method not Allowed")
     ;
 
     private Integer code;

@@ -3,9 +3,9 @@ package com.cloud.vblog.auth.restapi;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cloud.vblog.auth.entity.TUser;
 import com.cloud.vblog.auth.service.ITUserService;
-import com.cloud.vblog.common.dto.UserDto;
+import com.cloud.vblog.common.dto.auth.UserDto;
+import com.cloud.vblog.common.utils.ResultVoUtil;
 import com.cloud.vblog.common.vo.ResultVo;
-import com.cloud.vblog.utils.ResultVoUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -79,8 +79,8 @@ public class UserRestApi {
 	}
 
 
-	@GetMapping("/queryByUserName/{name}")
-	public ResultVo<List<TUser>> queryByUserName(@PathVariable String name){
+	@GetMapping("/queryByUserName}")
+	public ResultVo<List<TUser>> queryByUserName(@RequestParam String name){
 		return ResultVoUtil.success(userService.list(new QueryWrapper<TUser>().eq("user_name",name)));
 	}
 }

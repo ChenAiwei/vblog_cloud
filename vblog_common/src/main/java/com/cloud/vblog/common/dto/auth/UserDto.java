@@ -1,4 +1,4 @@
-package com.cloud.vblog.common.dto;
+package com.cloud.vblog.common.dto.auth;
 
 import lombok.Data;
 
