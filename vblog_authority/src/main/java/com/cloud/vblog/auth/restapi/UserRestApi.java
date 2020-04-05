@@ -33,7 +33,10 @@ public class UserRestApi {
 			return ResultVoUtil.error("uid为空");
 		}
 		UserDto userDto = new UserDto();
-		BeanUtils.copyProperties(userService.getById(uid),userDto);
+		TUser user = userService.getById(uid);
+		if (null != user){
+			BeanUtils.copyProperties(userService.getById(uid),userDto);
+		}
 		return ResultVoUtil.success(userDto);
 	}
 
@@ -79,8 +82,8 @@ public class UserRestApi {
 	}
 
 
-	@GetMapping("/queryByUserName}")
-	public ResultVo<List<TUser>> queryByUserName(@RequestParam String name){
+	@GetMapping("/queryByUserName")
+	public ResultVo<List<TUser>> queryByUserName(@RequestParam("name") String name){
 		return ResultVoUtil.success(userService.list(new QueryWrapper<TUser>().eq("user_name",name)));
 	}
 }

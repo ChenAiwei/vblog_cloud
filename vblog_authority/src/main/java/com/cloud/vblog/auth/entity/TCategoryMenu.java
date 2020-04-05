@@ -1,15 +1,16 @@
 package com.cloud.vblog.auth.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -79,13 +80,13 @@ public class TCategoryMenu extends Model<TCategoryMenu> {
      * 创建时间
      */
     @TableField("create_time")
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 更新时间
      */
     @TableField("update_time")
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
     /**
      * 是否显示 1:是 0:否
@@ -97,7 +98,7 @@ public class TCategoryMenu extends Model<TCategoryMenu> {
      * 菜单类型 0: 菜单   1: 按钮
      */
     @TableField("menu_type")
-    private Boolean menuType;
+    private Integer menuType;
 
 
     @Override

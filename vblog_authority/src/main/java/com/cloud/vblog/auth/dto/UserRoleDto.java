@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class UserRoleDto implements Serializable {
 	private Integer gender;
 	private String avator;
 	private String emial;
-	private LocalDate birthday;
+	private Date birthday;
 	private String mobile;
 	private Integer loginCount;
 	private LocalDate lastLoginTime;

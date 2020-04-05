@@ -7,8 +7,10 @@ public enum ResultEnum {
     LoginFail(-1, "登录失败"),
     RoleError(-1, "角色权限有误"),
 	MissingServletRequestParameter(400,"Missing servletRequest parameter"),
-	TypeMismatchException(401,"Request parameter Type not match"),
-    RequestMethodNotAllowed(405,"Request method not Allowed")
+    RequestBodyEmpty(400,"RequestBody Not Allow Empty"),
+    TypeMismatchException(401,"Request parameter Type not match"),
+    RequestMethodNotAllowed(405,"Request method not Allowed"),
+    InterfaceNotExist(404,"Interface does not exist"),
     ;
 
     private Integer code;

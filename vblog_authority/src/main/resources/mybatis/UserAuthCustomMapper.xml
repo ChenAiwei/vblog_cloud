@@ -24,6 +24,8 @@
             <result column="roleId" jdbcType="VARCHAR" property="uid"/>
             <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
             <result column="role_status" jdbcType="INTEGER" property="status"/>
+            <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+            <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
             <result column="category_menu_uids" jdbcType="VARCHAR" property="categoryMenuUids"/>
         </collection>
 
@@ -51,6 +53,8 @@
             r.uid AS roleId,
             r.role_name,
             r.`status` AS role_status,
+            r.create_time,
+            r.update_time,
             r.category_menu_uids
         FROM
             t_user u

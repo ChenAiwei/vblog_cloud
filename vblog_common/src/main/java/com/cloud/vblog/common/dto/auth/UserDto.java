@@ -3,8 +3,7 @@ package com.cloud.vblog.common.dto.auth;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @Author：chenaiwei
@@ -54,7 +53,7 @@ public class UserDto implements Serializable {
 	/**
 	 * 出生年月日
 	 */
-	private LocalDate birthday;
+	private Date birthday;
 
 	/**
 	 * 手机
@@ -69,7 +68,7 @@ public class UserDto implements Serializable {
 	/**
 	 * 最后登录时间
 	 */
-	private LocalDateTime lastLoginTime;
+	private Date lastLoginTime;
 
 	/**
 	 * 最后登录IP
@@ -114,10 +113,10 @@ public class UserDto implements Serializable {
 	/**
 	 * 创建时间
 	 */
-	private LocalDateTime createTime;
+	private Date createTime;
 
 	/**
 	 * 更新时间
 	 */
-	private LocalDateTime updateTime;
+	private Date updateTime;
 }

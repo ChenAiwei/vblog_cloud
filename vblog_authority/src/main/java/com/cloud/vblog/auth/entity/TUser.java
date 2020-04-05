@@ -1,16 +1,16 @@
 package com.cloud.vblog.auth.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -70,7 +70,7 @@ public class TUser extends Model<TUser> {
     /**
      * 出生年月日
      */
-    private LocalDate birthday;
+    private Date birthday;
 
     /**
      * 手机
@@ -87,7 +87,7 @@ public class TUser extends Model<TUser> {
      * 最后登录时间
      */
     @TableField("last_login_time")
-    private LocalDateTime lastLoginTime;
+    private Date lastLoginTime;
 
     /**
      * 最后登录IP
@@ -137,13 +137,13 @@ public class TUser extends Model<TUser> {
      * 创建时间
      */
     @TableField("create_time")
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 更新时间
      */
     @TableField("update_time")
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
 
     @Override

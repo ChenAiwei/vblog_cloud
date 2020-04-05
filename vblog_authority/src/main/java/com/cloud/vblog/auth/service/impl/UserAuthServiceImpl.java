@@ -10,6 +10,7 @@ import com.cloud.vblog.auth.service.IUserAuthService;
 import com.cloud.vblog.common.dto.auth.CategoryMenuDto;
 import com.cloud.vblog.common.dto.auth.RoleDto;
 import com.cloud.vblog.common.dto.auth.UserAuthDto;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,8 +63,8 @@ public class UserAuthServiceImpl implements IUserAuthService {
 	 */
 	private List<RoleDto> combineRoleList(List<TRole> roleList) {
 		List<RoleDto> roleDtoList = new ArrayList<>();
-		RoleDto dto = new RoleDto();
 		roleList.forEach(role->{
+			RoleDto dto = new RoleDto();
 			BeanUtils.copyProperties(role,dto);
 			roleDtoList.add(dto);
 		});
@@ -84,7 +85,7 @@ public class UserAuthServiceImpl implements IUserAuthService {
 		});
 		//对合并在一起的菜单信息进行去重，组装成树结构化，并且排序（用户可能有多个角色）
 		List<CategoryMenuDto> categoryMenuDtoList = new ArrayList<>();
-		if (!tCategoryMenus.isEmpty()){
+		if (CollectionUtils.isNotEmpty(tCategoryMenus)){
 			categoryMenuDtoList = combineAndSortMenu(tCategoryMenus);
 		}
 		return categoryMenuDtoList;
@@ -96,7 +97,7 @@ public class UserAuthServiceImpl implements IUserAuthService {
 	 * @return
 	 */
 	private List<TCategoryMenu> getMenuList(String categoryMenuUids) {
-		String categoryMenuUidsNew = categoryMenuUids.replace("[", "").replace("]", "");
+		String categoryMenuUidsNew = categoryMenuUids.replace("[", "").replace("]", "").replace("\"","");
 		String[] menuUids = StringUtils.split(categoryMenuUidsNew, ",");
 		List<TCategoryMenu> categoryMenus = categoryMenuService.list(new QueryWrapper<TCategoryMenu>().in("uid", menuUids).eq("status",1));
 		return categoryMenus;
@@ -116,8 +117,7 @@ public class UserAuthServiceImpl implements IUserAuthService {
 			BeanUtils.copyProperties(categoryMenu,dto);
 			categoryMenuDtoList.add(dto);
 		});
-		this.buildByRecursive(categoryMenuDtoList);
-		return categoryMenuDtoList;
+		return buildByRecursive(categoryMenuDtoList);
 	}
 
 	/**
@@ -144,7 +144,7 @@ public class UserAuthServiceImpl implements IUserAuthService {
 	private void treeSort(List<CategoryMenuDto> trees) {
 		trees.stream().sorted((a, b) -> a.getSort() - b.getSort()).collect(Collectors.toList());
 		trees.forEach(tree ->{
-			if (!tree.getChildMenuList().isEmpty()){
+			if (CollectionUtils.isNotEmpty(tree.getChildMenuList())){
 				treeSort(tree.getChildMenuList());
 			}
 		});

@@ -3,7 +3,7 @@ package com.cloud.vblog.common.dto.auth;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -63,12 +63,12 @@ public class CategoryMenuDto implements Serializable {
 	/**
 	 * 创建时间
 	 */
-	private LocalDateTime createTime;
+	private Date createTime;
 
 	/**
 	 * 更新时间
 	 */
-	private LocalDateTime updateTime;
+	private Date updateTime;
 
 	/**
 	 * 是否显示 1:是 0:否
@@ -78,7 +78,7 @@ public class CategoryMenuDto implements Serializable {
 	/**
 	 * 菜单类型 0: 菜单   1: 按钮
 	 */
-	private Boolean menuType;
+	private Integer menuType;
 
 	private List<CategoryMenuDto> childMenuList;
 

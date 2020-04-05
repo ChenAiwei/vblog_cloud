@@ -3,7 +3,7 @@ package com.cloud.vblog.common.dto.auth;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,10 +19,10 @@ public class UserAuthDto implements Serializable {
 	private Integer gender;
 	private String avator;
 	private String emial;
-	private LocalDate birthday;
+	private Date birthday;
 	private String mobile;
 	private Integer loginCount;
-	private LocalDate lastLoginTime;
+	private Date lastLoginTime;
 	private String lastLoginIp;
 	private Integer userStatus;
 	private String uuid;

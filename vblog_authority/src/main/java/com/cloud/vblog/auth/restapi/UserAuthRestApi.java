@@ -35,4 +35,9 @@ public class UserAuthRestApi {
 	public ResultVo<List<UserAuthDto>> list(@PathVariable String uid){
 			return ResultVoUtil.success(userAuthService.info(uid));
 	}
+
+	@GetMapping("/listAll")
+	public ResultVo<List<UserAuthDto>> listAll(){
+		return ResultVoUtil.success(userAuthService.info(null));
+	}
 }
