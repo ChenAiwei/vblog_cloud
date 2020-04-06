@@ -1,6 +1,5 @@
 package com.cloud.vblog.auth.service;
 
-import com.cloud.vblog.auth.dto.UserRoleDto;
 import com.cloud.vblog.common.dto.auth.UserAuthDto;
 
 import java.util.List;

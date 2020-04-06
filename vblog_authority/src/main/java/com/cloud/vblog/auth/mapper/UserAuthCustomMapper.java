@@ -1,7 +1,6 @@
 package com.cloud.vblog.auth.mapper;
 
 import com.cloud.vblog.auth.dto.UserRoleDto;
-import com.cloud.vblog.common.dto.auth.UserAuthDto;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
