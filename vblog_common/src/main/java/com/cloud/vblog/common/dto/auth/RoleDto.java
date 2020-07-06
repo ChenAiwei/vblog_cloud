@@ -2,8 +2,10 @@ package com.cloud.vblog.common.dto.auth;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author：chenaiwei
@@ -17,11 +19,13 @@ public class RoleDto implements Serializable {
 	/**
 	 * 角色id
 	 */
+	@NotBlank(message = "uid 为空",groups = ValidationGroups.Editer.class)
 	private String uid;
 
 	/**
 	 * 角色名
 	 */
+	@NotBlank(message = "roleName 为空",groups = {ValidationGroups.Editer.class,ValidationGroups.Register.class})
 	private String roleName;
 
 	/**
@@ -44,4 +48,13 @@ public class RoleDto implements Serializable {
 	 */
 	private String summary;
 
+	/**
+	 * 角色管辖的菜单的UID
+	 */
+	private List<String> categoryMenuUids;
+
+	/**
+	 * 角色下的用户信息
+	 */
+	private List<UserRoleInfoDto> userRoleInfoDtoList;
 }

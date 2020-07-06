@@ -15,7 +15,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: 'hystrix.stream,routes,filters,info,health,shutdown'
+        include: 'hystrix.stream,routes,filters,info,health,nacos-discovery'
   endpoint:
     health:
       show-details: always

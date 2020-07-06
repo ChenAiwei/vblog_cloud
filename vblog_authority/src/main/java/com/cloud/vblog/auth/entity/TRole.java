@@ -5,10 +5,12 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.cloud.vblog.common.dto.auth.ValidationGroups;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -31,13 +33,13 @@ public class TRole extends Model<TRole> {
     /**
      * 角色id
      */
-    @TableId(value = "uid", type = IdType.AUTO)
+    @TableId(value = "uid")
     private String uid;
 
     /**
      * 角色名
      */
-    @TableField("role_name")
+	@TableField("role_name")
     private String roleName;
 
     /**

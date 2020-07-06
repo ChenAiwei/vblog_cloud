@@ -10,6 +10,7 @@ import com.cloud.vblog.auth.service.IUserAuthService;
 import com.cloud.vblog.common.dto.auth.CategoryMenuDto;
 import com.cloud.vblog.common.dto.auth.RoleDto;
 import com.cloud.vblog.common.dto.auth.UserAuthDto;
+import com.cloud.vblog.common.utils.JsonUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -96,9 +97,8 @@ public class UserAuthServiceImpl implements IUserAuthService {
 	 * @return
 	 */
 	private List<TCategoryMenu> getMenuList(String categoryMenuUids) {
-		String categoryMenuUidsNew = categoryMenuUids.replace("[", "").replace("]", "").replace("\"","");
-		String[] menuUids = StringUtils.split(categoryMenuUidsNew, ",");
-		List<TCategoryMenu> categoryMenus = categoryMenuService.list(new QueryWrapper<TCategoryMenu>().in("uid", menuUids).eq("status",1));
+		ArrayList<String> categoryMenuUidsList = (ArrayList<String>) JsonUtils.jsonArrayToArrayList(categoryMenuUids);
+		List<TCategoryMenu> categoryMenus = categoryMenuService.list(new QueryWrapper<TCategoryMenu>().in("uid", categoryMenuUidsList).eq("status",1));
 		return categoryMenus;
 	}
 

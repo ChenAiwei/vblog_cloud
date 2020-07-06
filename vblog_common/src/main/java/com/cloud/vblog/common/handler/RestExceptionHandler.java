@@ -5,10 +5,13 @@ import com.cloud.vblog.common.exception.ServiceException;
 import com.cloud.vblog.common.utils.ResultVoUtil;
 import com.cloud.vblog.common.vo.ResultVo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,6 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @author aiwei
@@ -69,8 +75,8 @@ public class RestExceptionHandler {
     @ExceptionHandler(NoHandlerFoundException.class)
     @ResponseBody
     public ResultVo<Object> noHandlerFoundException(NoHandlerFoundException e) {
-        log.error("404接口不存在:【" + e.getMessage() + "】");
-        return ResultVoUtil.error(ResultEnum.InterfaceNotExist);
+		log.error("404接口不存在:【" + e.getMessage() + "】");
+		return ResultVoUtil.error(ResultEnum.InterfaceNotExist);
     }
 
     /**
@@ -123,4 +129,17 @@ public class RestExceptionHandler {
         }
         return ResultVoUtil.error(stringBuffer.toString());
     }
+
+	/**
+	 * 表单验证
+	 * @param e
+	 * @return
+	 */
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	@ResponseBody
+	public ResultVo<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+		log.error(e.getMessage(), e);
+		BindingResult bindingResult = e.getBindingResult();
+		return ResultVoUtil.error(bindingResult.getAllErrors().get(0).getDefaultMessage());
+	}
 }

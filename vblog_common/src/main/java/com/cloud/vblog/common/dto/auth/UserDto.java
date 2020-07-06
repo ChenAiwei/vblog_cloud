@@ -2,8 +2,11 @@ package com.cloud.vblog.common.dto.auth;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author：chenaiwei
@@ -18,16 +21,19 @@ public class UserDto implements Serializable {
 	/**
 	 * 唯一uid
 	 */
+	@NotBlank(message = "uid 不允许为空",groups = ValidationGroups.Editer.class)
 	private String uid;
 
 	/**
 	 * 用户名
 	 */
+	@NotBlank(message = "userName 不允许为空",groups = {ValidationGroups.Register.class,ValidationGroups.Editer.class})
 	private String userName;
 
 	/**
 	 * 密码
 	 */
+	@NotBlank(message = "passWord 不允许为空",groups = ValidationGroups.Register.class)
 	private String passWord;
 
 	/**
@@ -38,7 +44,8 @@ public class UserDto implements Serializable {
 	/**
 	 * 性别(1:男2:女)
 	 */
-	private Boolean gender;
+	@NotNull(message = "gender 不允许为空",groups = ValidationGroups.Register.class)
+	private Integer gender;
 
 	/**
 	 * 个人头像
@@ -119,4 +126,9 @@ public class UserDto implements Serializable {
 	 * 更新时间
 	 */
 	private Date updateTime;
+
+	/**
+	 * 用户角色信息
+	 */
+	private List<RoleUserInfoDto> roleUserInfoDtoList;
 }

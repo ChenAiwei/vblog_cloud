@@ -1,15 +1,17 @@
 package com.cloud.vblog.auth.restapi;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.cloud.vblog.auth.entity.TUser;
+import com.cloud.vblog.auth.entity.TUserRole;
+import com.cloud.vblog.auth.service.ITUserRoleService;
 import com.cloud.vblog.auth.service.ITUserService;
 import com.cloud.vblog.common.dto.auth.UserDto;
+import com.cloud.vblog.common.dto.auth.ValidationGroups;
 import com.cloud.vblog.common.utils.ResultVoUtil;
 import com.cloud.vblog.common.vo.ResultVo;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,64 +28,37 @@ public class UserRestApi {
 
 	@Autowired
 	private ITUserService userService;
+	@Autowired
+	private ITUserRoleService userRoleService;
 
-	@GetMapping("/getUser/{uid}")
-	public ResultVo<UserDto> getUser(@PathVariable String uid){
-		if (StringUtils.isBlank(uid)){
-			return ResultVoUtil.error("uid为空");
-		}
-		UserDto userDto = new UserDto();
-		TUser user = userService.getById(uid);
-		if (null != user){
-			BeanUtils.copyProperties(userService.getById(uid),userDto);
-		}
-		return ResultVoUtil.success(userDto);
+	@GetMapping("/queryByUserId/{uid}")
+	public ResultVo<UserDto> queryByUserId(@PathVariable String uid){
+		return ResultVoUtil.success(userService.queryByUserId(uid));
 	}
 
 	@GetMapping("/delUser/{uid}")
-	public ResultVo<String> delUser(@PathVariable String uid){
-		if (StringUtils.isBlank(uid)){
-			return ResultVoUtil.error("uid为空");
-		}
-		boolean b = userService.removeById(uid);
-		if (b){
-			return ResultVoUtil.success("删除成功");
-		}else {
-			return ResultVoUtil.error("删除失败");
-		}
+	@Transactional(rollbackFor = Exception.class)
+	public ResultVo<?> delUser(@PathVariable String uid){
+		userRoleService.remove(new QueryWrapper<TUserRole>().eq("user_id",uid));
+		userService.removeById(uid);
+		return ResultVoUtil.success();
 	}
 
 	@PostMapping("/addUser")
-	public ResultVo<String> addUser(@RequestBody UserDto userDto){
-		TUser user = new TUser();
-		BeanUtils.copyProperties(userDto,user);
-		boolean save = userService.save(user);
-		if (save){
-			return ResultVoUtil.success("新增成功");
-		}else {
-			return ResultVoUtil.error("新增失败");
-		}
+	public ResultVo<?> addUser(@Validated(ValidationGroups.Register.class) @RequestBody UserDto userDto){
+		userService.saveUser(userDto);
+		return ResultVoUtil.success();
 	}
 
 	@PostMapping("/editUser")
-	public ResultVo<String> editUser(@RequestBody UserDto userDto){
-		String uid = userDto.getUid();
-		TUser user = userService.getById(uid);
-		if (null == user){
-			return ResultVoUtil.error("修改失败,用户不存在");
-		}
-		BeanUtils.copyProperties(userDto,user);
-		user.setUid(uid);
-		if (userService.updateById(user)){
-			return ResultVoUtil.success("修改成功");
-		}else{
-			return ResultVoUtil.error("修改失败");
-		}
+	public ResultVo<String> editUser(@Validated(ValidationGroups.Editer.class) @RequestBody UserDto userDto){
+		userService.editUser(userDto);
+		return ResultVoUtil.success();
 	}
 
 
 	@GetMapping("/queryByUserName")
-	public ResultVo<List<TUser>> queryByUserName(@RequestParam("name") String name){
-		return ResultVoUtil.success(userService.list(new QueryWrapper<TUser>().eq("user_name",name)));
+	public ResultVo<List<UserDto>> queryByUserName(@RequestParam("name") String name){
+		return ResultVoUtil.success(userService.queryByUserName(name));
 	}
 }

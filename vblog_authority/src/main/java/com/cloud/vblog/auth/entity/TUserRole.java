@@ -26,7 +26,7 @@ public class TUserRole extends Model<TUserRole> {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "uid", type = IdType.AUTO)
+    @TableId(value = "uid")
     private String uid;
 
     /**

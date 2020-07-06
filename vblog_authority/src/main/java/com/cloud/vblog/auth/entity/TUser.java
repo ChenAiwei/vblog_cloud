@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -31,7 +32,7 @@ public class TUser extends Model<TUser> {
     /**
      * 唯一uid
      */
-    @TableId(value = "uid", type = IdType.AUTO)
+    @TableId(value = "uid")
     private String uid;
 
     /**
@@ -55,7 +56,7 @@ public class TUser extends Model<TUser> {
     /**
      * 性别(1:男2:女)
      */
-    private Boolean gender;
+    private Integer gender;
 
     /**
      * 个人头像
