@@ -132,21 +132,22 @@ public class UserAuthServiceImpl implements IUserAuthService {
 				trees.add(findChildren(treeNode, treeNodes));
 			}
 		}
-		treeSort(trees);
-		return trees;
+		List<CategoryMenuDto> collector = treeSort(trees);
+		return collector;
 	}
 
 	/**
 	 * 升序递归排序
 	 * @param trees
 	 */
-	private void treeSort(List<CategoryMenuDto> trees) {
-		trees.stream().sorted((a, b) -> a.getSort() - b.getSort()).collect(Collectors.toList());
-		trees.forEach(tree ->{
+	private List<CategoryMenuDto> treeSort(List<CategoryMenuDto> trees) {
+		List<CategoryMenuDto> collect = trees.stream().sorted((a, b) -> a.getSort() - b.getSort()).collect(Collectors.toList());
+		collect.forEach(tree ->{
 			if (CollectionUtils.isNotEmpty(tree.getChildMenuList())){
-				treeSort(tree.getChildMenuList());
+				tree.setChildMenuList(treeSort(tree.getChildMenuList()));
 			}
 		});
+		return collect;
 	}
 
 	/**

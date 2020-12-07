@@ -1,8 +1,8 @@
 spring:
   application:
-    name: vblog_authority
+    name: vblog_admin
   profiles:
-    active: test
+    active: dev
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -10,12 +10,6 @@ spring:
     throw-exception-if-no-handler-found: true
   resources:
     add-mappings: false
-  cloud:
-    nacos:
-      config:
-        file-extension: yaml
-        namespace: b2fcfbce-0a9b-480b-ba20-a0e58bf4ce3e
-        server-addr: 47.115.166.117:8848
 # 监控地址传入http://localhost:8300/actuator/hystrix.stream
 management:
   endpoints:
@@ -39,7 +33,7 @@ feign:
 
 mybatis-plus:
   mapperLocations: mybatis/**Mapper.xml
-  type-aliases-package: com.cloud.vblog.auth.entity
+  type-aliases-package: com.cloud.vblog.admin.entity
   global-config:
     # 数据库相关配置
     db-config:

@@ -1,20 +1,5 @@
 server:
   port: 8500
-#eureka相关配置
-eureka:
-  client:
-    security:
-      user:
-        name: c649d6185032697ada52a13e7ea75bf3
-        password: f3567443d4fd7988fbed18d736c64091
-    service-url:
-      defaultZone: http://${eureka.client.security.user.name}:${eureka.client.security.user.password}@localhost:8761/eureka/
-    # 针对新服务上线, Eureka client获取不及时的问题，在测试环境，可以适当提高Client端拉取Server注册信息的频率，默认：30秒
-    registry-fetch-interval-seconds: 30
-  instance:
-    prefer-ip-address: true
-    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
-    lease-renewal-interval-in-seconds: 5
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -52,6 +37,4 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
-      config:
         server-addr: 127.0.0.1:8848
